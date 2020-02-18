@@ -1,103 +1,55 @@
 # [Eporner](https://www.eporner.com/)
 
-Eporner is one of the largest adult video HD porn tube. It has over 1M videos with qualities up to 4K.
+Eporner is one of the largest adult video HD porn tube. It has over 3.000.000 videos with qualities up to 4K.
 
-## [API](https://www.eporner.com/api/)
+## [API v2](https://www.eporner.com/api/v2/)
 
-We have published our API for webmasters who want to publish our videos on their sites. Our API is based on well-known XML language and should be really simple to implement. We also prepared some examples in PHP to make it easiest for you.
+We have published our API for webmasters who want to publish our videos on their sites. Our API is RESTfull, return results in JSON or XML and should be really simple to implement. We also prepared some examples in PHP to make it easiest for you.
 
-### XML Schema
-```
-<eporner-data>
-<movie>
-<id>id of video</id>
-<sid>string id of video</id>
-<title>title of the video</title>
-<keywords>keywords</keywords>
-<views># of views</views>
-<loc>URL to watch page</loc>
-<imgthumb>URL thumbnail with standard preview</imgthumb>
-<imgthumb320x240>URL thumbnail with 320x240px preview</imgthumb320x240>
-<added>add date (UNIX timestamp)</added>
-<added2>add date (YYYY-MM-DD HH:MM format)</added2>
-<lenghtsec>lenght of videoin seconds</lenghtsec>
-<lenghtmin>lenght of video id MM:SS format</lenghtmin>
-<embed>embed code to put player on your website</embedscript>
-</movie>
-</eporner-data>
+### Quick start
+All API calls must be made using HTTP GET to the following endpoint:
 
-```
+```https://www.eporner.com/api/v2/video/METHOD/```
 
-### XML address
+Where METHOD can be:
 
-URL scheme looks like this:
-```https://www.eporner.com/api_xml/KEYWORDS/NUMBER_OF_VIDEOS```
+```search```
 
-Where KEYWORDS are the keywords of the videos you like to display eg. "brunette", "teen" OR "all" you you want to display all videos.
+Allow you to get video list matching your criteria. Please note that list will be paginated with no more than 1000 per page. To get more results you will have to make consecutive calls to the next pages.
 
-NUMBER_OF_VIDEOS is number of videos you would like to display on your site. For example 5, 10, 15, 30
+```id```
 
-Sample URLs:
+Allow you to get information about one specific video identified by id. It can be also used to check if given video is still alive.
 
-```https://www.eporner.com/api_xml/all/5```
+```removed```
 
-```https://www.eporner.com/api_xml/anal/10```
+Return list of all removed video ids.
 
-```https://www.eporner.com/api_xml/girlfriend/45```
 
-If you want to get all videos list try this (filesize is over 50MB) :
-```https://www.eporner.com/api_xml/all/1000000```
+
+
+### Full documentation
+
+Your can find full documentation of each of our API calls and responses on the official [Eporner API Documentation](https://www.eporner.com/api/v2/)
 
 ### PHP Examples
 
-List of last 5 videos with thumbnails:
+Example #1: Fetch latest 50 videos videos tagged as anal:
 
 Source code:
-https://github.com/eporner/API/blob/master/examples/api_example2.php
-
-Preview:
-```https://www.eporner.com/api_example2```
+https://github.com/eporner/API/blob/master/examples/php_example_1.php
 
 
-
-Last 5 videos with embed watch code:
+Example #2: Fetch all videos with big thumbnails ordered by most popular:
 
 Source code:
-https://github.com/eporner/API/blob/master/examples/api_example1.php
-
-Preview:
-```https://www.eporner.com/api_example1```
-
-### Popular videos
-
-Popular videos scheme:
-
-```https://www.eporner.com/api_xml/popular/NUMBER_OF_VIDEOS/```
+https://github.com/eporner/API/blob/master/examples/php_example_2.php
 
 
-Where NUMBER_OF_VIDEOS is number of videos you would like to display on your site. For example 5, 10, 15, 30. Max for popular videos is 32.
+Example #3: Fetch information about single video by id:
 
-### Advanced URL scheme
-
-Advanced URL scheme:
-
-```https://www.eporner.com/api_xml/KEYWORDS/NUMBER_OF_VIDEOS/START_FROM/ORDER_BY```
-
-
-Where KEYWORDS are the keywords of the videos you like to display eg. "brunette", "teen" OR "all" you you want to display all videos
-NUMBER_OF_VIDEOS is number of videos you would like to display on your site. For example 5, 10, 15, 30
-START_FROM is the number of videos you would like to skip from the beginning of list
-ORDER_BY is videos sorting. Currently supported "adddate" and "id". Videos sorted by "adddate" will change every database update. Videos sorted by "id" will be always the same.
-
-Sample advanced URLs:
-
-```https://www.eporner.com/api_xml/all/10/0/id```
-
-```https://www.eporner.com/api_xml/all/10/5/id```
-
-```https://www.eporner.com/api_xml/blowjob/5/10/adddate```
-
-```https://www.eporner.com/api_xml/anal/15/0/adddate```
+Source code:
+https://github.com/eporner/API/blob/master/examples/php_example_3.php
 
 
 #### Enjoy coding !
